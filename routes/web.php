@@ -40,8 +40,7 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', f
 
 //users
 Route::get('/',[IndexController::class,'index']);
-Route::get('users/login/form', [UserController::class,'create']);
-Route::post('/user/login',[UserController::class,'login'])->name('user.login');
+
 
 
 
