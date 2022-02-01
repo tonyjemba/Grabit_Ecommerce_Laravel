@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\backend\AdminProfileController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +41,9 @@ Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', f
 
 //users
 Route::get('/',[IndexController::class,'index']);
-
+Route::get("user/logout",[IndexController::class,'userLogout'])->name('user.logout');
+Route::get("user/profile/update",[IndexController::class,'userprofilefields'])->name('profile.update');
+Route::post("user/profile/make/update",[IndexController::class,'update'])->name('update.fields');
 
 
 
