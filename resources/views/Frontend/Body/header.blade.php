@@ -11,7 +11,7 @@
               <li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
               <li><a href="#"><i class="icon fa fa-check"></i>Checkout</a></li>
               @auth
-              <li><a href="{{ route('login') }}"><i class="icon fa fa-user"></i>{{ Auth::user()->name }}</a></li>
+              <li><a href="{{Auth::check()? route('user.logout'):route('login') }}"><i class="icon fa fa-user"></i>{{ Auth::user()->name }}</a></li>
 
                 @else
               <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>Login/Register</a></li>
