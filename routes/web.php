@@ -40,7 +40,10 @@ Route::post('admin/change/password/trigger',[AdminProfileController::class,'addu
 Route::prefix('brand')->group(function(){
     Route::get("/view",[BrandController::class,"brandview" ])->name('all.brand');
     Route::post("/add",[BrandController::class,"AddBrand"])->name('brand.store');
+    Route::get('/edit/{id}', [BrandController::class, 'BrandEdit'])->name('brand.edit');
+    Route::post("/update",[BrandController::class,"brandUpdate"])->name('brand.update');
 });
+
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
