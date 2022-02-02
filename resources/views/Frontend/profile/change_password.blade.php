@@ -23,38 +23,33 @@
                 <div class="col-md-8">
                     <div class="card">
                         <div class="text-center">
-                            <div class="text-danger">Hello <strong>{{ Auth::user()->name }}</strong> Update your profile</div>
+                            <div class="text-danger"> Change  Password</div>
                         </div>
 
                         <div class="card-body">
-                            <form method="POST" action="{{ route('update.fields') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('user.change.password') }}" >
                                 @csrf
                                 <div class="form-group">
-                                    <label class="info-title" for="exampleInputEmail1">Name </label>
-                                    <input type="text" name="name" class="form-control unicase-form-control text-input"
-                                        id="name" value="{{ $user->name }}" />
+                                    <label class="info-title" for="exampleInputEmail1">Currrent password </label>
+                                    <input type="password" name="oldpassword" class="form-control unicase-form-control text-input"
+                                        id="oldpassword"  />
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label class="info-title" for="exampleInputEmail1">Email </label>
-                                    <input type="email" name="email" class="form-control unicase-form-control text-input"
-                                        id="email" value="{{ $user->email }}" />
+                                    <label class="info-title" for="exampleInputEmail1">Current Password </label>
+                                    <input type="password" name="password" class="form-control unicase-form-control text-input"
+                                        id="password"  />
                                     
                                 </div>
                                 <div class="form-group">
-                                    <label class="info-title" for="exampleInputEmail1">Phone </label>
-                                    <input type="phone" name="phone" class="form-control unicase-form-control text-input"
-                                        id="phone" value="{{ $user->phone }}" />
+                                    <label class="info-title" for="exampleInputEmail1">Confirem Password</label>
+                                    <input type="password" name="password_confirmation" class="form-control unicase-form-control text-input"
+                                        id="password_confirmation"  />
                                     
                                 </div>
-                                <div class="form-group">
-                                    <label class="info-title" for="exampleInputEmail1">Profile Image </label>
-                                    <input type="file" name="profile_photo_path" class="form-control unicase-form-control text-input"
-                                        id="phone" />
-                                    
-                                </div>
+                            
 
-                                <button type="submit" class="btn btn-primary" style="margin-bottom:20px">Update Profile</button>
+                                <button type="submit" class="btn btn-primary" style="margin-bottom:20px">Change Password</button>
                             </form>
                         </div>
 
