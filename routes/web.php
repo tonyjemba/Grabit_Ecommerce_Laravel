@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\backend\AdminProfileController;
+use App\Http\Controllers\backend\BrandController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 
-//admin
+//admin backend
 
 Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 	Route::get('/login/form', [AdminController::class, 'loginForm'])->name('admin.login.form');
@@ -35,11 +36,18 @@ Route::post('/admin/profile/store',[AdminProfileController::class,'store'])->nam
 Route::get('admin/change/password',[AdminProfileController::class,'changepassword'])->name('admin.changepassword');
 Route::post('admin/change/password/trigger',[AdminProfileController::class,'addupdatedpassword'])->name('update.admin.change.password');
 
+//admin All Brands routes
+Route::prefix('brand')->group(function(){
+    Route::get("/view",[BrandController::class,"brandview" ])->name('all.brand');
+    Route::post("/add",[BrandController::class,"AddBrand"])->name('brand.store');
+});
+
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
 })->name('dashboard');
 
-//users
+
+//users frontend
 Route::get('/',[IndexController::class,'index']);
 Route::get("user/logout",[IndexController::class,'userLogout'])->name('user.logout');
 Route::get("user/profile/update",[IndexController::class,'userprofilefields'])->name('profile.update');

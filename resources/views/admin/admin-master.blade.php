@@ -56,6 +56,9 @@
     <!-- Sunny Admin App -->
     <script src="{{ asset('backend/js/template.js') }}"></script>
     <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
+    {{-- table logic --}}
+    <script src="{{ asset('assets/vendor_components/datatable/datatables.min.js') }}"></script>
+	<script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
 
 
 </body>
