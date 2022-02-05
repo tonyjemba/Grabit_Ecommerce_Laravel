@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\backend\AdminProfileController;
 use App\Http\Controllers\backend\BrandController;
+use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +46,11 @@ Route::prefix('brand')->group(function(){
     Route::get("/delete/{id}",[BrandController::class,"delete"])->name('brand.delete');
 });
 
+//admin All category routes
+Route::prefix('category')->group(function(){
+    Route::get("/view",[CategoryController::class,"catview" ])->name('view.category');
 
+});
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
 })->name('dashboard');
