@@ -42,7 +42,7 @@
                                                 <td>{{ $item->category_name_en }}</td>
                                                 <td>{{ $item->category_name_hin }}</td>
                                                 <td>
-                                                    <a href=""
+                                                    <a href="{{ route('category.edit',$item->id) }}"
                                                         class="btn btn-info" title="Edit Data"><i
                                                             class="fa fa-pencil"></i> </a>
                                                     <a href=""

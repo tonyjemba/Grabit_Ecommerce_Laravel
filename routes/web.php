@@ -50,6 +50,8 @@ Route::prefix('brand')->group(function(){
 Route::prefix('category')->group(function(){
     Route::get("/view",[CategoryController::class,"catview" ])->name('view.category');
     Route::post("/add",[CategoryController::class,"AddCat"])->name('category.store');
+    Route::get('/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
+    Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
 
 });
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
