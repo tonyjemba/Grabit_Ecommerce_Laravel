@@ -49,6 +49,7 @@ Route::prefix('brand')->group(function(){
 //admin All category routes
 Route::prefix('category')->group(function(){
     Route::get("/view",[CategoryController::class,"catview" ])->name('view.category');
+    Route::post("/add",[CategoryController::class,"AddCat"])->name('category.store');
 
 });
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
