@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Image;
 
 class BrandController extends Controller
@@ -103,4 +104,20 @@ class BrandController extends Controller
 
     	} // end else 
     }
+
+	public function delete($id){
+
+		$brand = Brand::findOrFail($id);
+		$image = $brand->brand_image;
+		unlink($image);
+
+		$brand->delete();
+
+		$notification = ([
+			'message' => 'Brand deleted successfully',
+			'alert-type' => 'info'
+		]);
+
+		return Redirect()->back()->with($notification);
+	}
 }
