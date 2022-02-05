@@ -52,6 +52,7 @@ Route::prefix('category')->group(function(){
     Route::post("/add",[CategoryController::class,"AddCat"])->name('category.store');
     Route::get('/edit/{id}', [CategoryController::class, 'CategoryEdit'])->name('category.edit');
     Route::post('/update/{id}', [CategoryController::class, 'CategoryUpdate'])->name('category.update');
+    Route::get('/delete/{id}', [CategoryController::class, 'CategoryDelete'])->name('category.delete');
 
 });
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
