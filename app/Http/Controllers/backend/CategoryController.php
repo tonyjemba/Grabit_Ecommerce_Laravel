@@ -48,6 +48,7 @@ class CategoryController extends Controller
             return view('backend.category.category_edit',compact('category'));
     
         }
+        
         public function CategoryUpdate(Request $request ,$id){
 
     	 
