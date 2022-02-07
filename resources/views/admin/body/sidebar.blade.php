@@ -1,7 +1,7 @@
 @php
-    //use to make the selected tab active
-    $prefix = Request::route()->getPrefix();
-  $route = Route::current()->getName();
+//use to make the selected tab active
+$prefix = Request::route()->getPrefix();
+$route = Route::current()->getName();
 @endphp
 
 <aside class="main-sidebar">
@@ -23,14 +23,14 @@
         <!-- sidebar menu-->
         <ul class="sidebar-menu" data-widget="tree">
 
-            <li class="{{ ($route == 'dashboard')? "active": '' }}" >
+            <li class="{{ $route == 'dashboard' ? 'active' : '' }}">
                 <a href="{{ url('admin/dashboard') }}">
                     <i data-feather="pie-chart"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
 
-            <li class="treeview {{ ($route == "all.brand")?"active":"" }}">
+            <li class="treeview {{ $route == 'all.brand' ? 'active' : '' }}">
                 <a href="{{ route('all.brand') }}">
                     <i data-feather="message-circle"></i>
                     <span>Brands</span>
@@ -39,11 +39,12 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="{{ ($route == "all.brand")?"active":"" }}"><a href="{{ route('all.brand') }}"><i class="ti-more"></i>All Brands</a></li>
+                    <li class="{{ $route == 'all.brand' ? 'active' : '' }}"><a href="{{ route('all.brand') }}"><i
+                                class="ti-more"></i>All Brands</a></li>
                 </ul>
             </li>
 
-            <li class="treeview {{ ($prefix == "/category")?"active":"" }}">
+            <li class="treeview {{ $prefix == '/category' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="mail"></i> <span>Category</span>
                     <span class="pull-right-container">
@@ -52,26 +53,31 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{ route('view.category') }}"><i class="ti-more"></i>All Category</a></li>
-                    <li class="{{ ($route == 'all.subcategory')? 'active':'' }}"><a href="{{ route('all.subcategory') }}"><i class="ti-more"></i>All SubCategory</a></li>
-                    <li class="{{ ($route == 'all.subsubcategory')? 'active':'' }}"><a href="{{ route('all.subsubcategory') }}"><i class="ti-more"></i>All Sub-subCategory</a></li>
+                    <li class="{{ $route == 'all.subcategory' ? 'active' : '' }}"><a
+                            href="{{ route('all.subcategory') }}"><i class="ti-more"></i>All SubCategory</a>
+                    </li>
+                    <li class="{{ $route == 'all.subsubcategory' ? 'active' : '' }}"><a
+                            href="{{ route('all.subsubcategory') }}"><i class="ti-more"></i>All
+                            Sub-subCategory</a></li>
 
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview {{ $prefix == '/product' ? 'active' : '' }}">
                 <a href="#">
                     <i data-feather="file"></i>
-                    <span>Pages</span>
+                    <span>Products</span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-right pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="profile.html"><i class="ti-more"></i>Profile</a></li>
-                    <li><a href="invoice.html"><i class="ti-more"></i>Invoice</a></li>
-                    <li><a href="gallery.html"><i class="ti-more"></i>Gallery</a></li>
-                    <li><a href="faq.html"><i class="ti-more"></i>FAQs</a></li>
-                    <li><a href="timeline.html"><i class="ti-more"></i>Timeline</a></li>
+                    <li class="{{ $route == 'add-product' ? 'active' : '' }}"><a
+                            href="{{ route('add-product') }}"><i class="ti-more"></i>Add Products</a></li>
+
+                    <li class="{{ $route == 'manage-product' ? 'active' : '' }}"><a
+                            href="{{ route('manage-product') }}"><i class="ti-more"></i>Manage Products</a>
+                    </li>
                 </ul>
             </li>
 
@@ -89,30 +95,30 @@
                     <li><a href="components_alerts.html"><i class="ti-more"></i>Alerts</a></li>
                     <li><a href="components_badges.html"><i class="ti-more"></i>Badge</a></li>
                     <li><a href="components_buttons.html"><i class="ti-more"></i>Buttons</a></li>
-                  
-                    </li>
-                </ul>
+
             </li>
+        </ul>
+        </li>
 
-            <li class="treeview">
-                <a href="#">
-                    <i data-feather="credit-card"></i>
-                    <span>Cards</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-right pull-right"></i>
-                    </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="card_advanced.html"><i class="ti-more"></i>Advanced Cards</a></li>
-                    <li><a href="card_basic.html"><i class="ti-more"></i>Basic Cards</a></li>
-                    <li><a href="card_color.html"><i class="ti-more"></i>Cards Color</a></li>
-                </ul>
-            </li>
-
-            
+        <li class="treeview">
+            <a href="#">
+                <i data-feather="credit-card"></i>
+                <span>Cards</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-right pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="card_advanced.html"><i class="ti-more"></i>Advanced Cards</a></li>
+                <li><a href="card_basic.html"><i class="ti-more"></i>Basic Cards</a></li>
+                <li><a href="card_color.html"><i class="ti-more"></i>Cards Color</a></li>
+            </ul>
+        </li>
 
 
-            
+
+
+
 
         </ul>
     </section>
@@ -124,6 +130,6 @@
         <!-- item-->
         <a href="mailbox_inbox.html" class="link" data-toggle="tooltip" title=""
             data-original-title="Email"><i class="ti-email"></i></a>
-       
+
     </div>
 </aside>
