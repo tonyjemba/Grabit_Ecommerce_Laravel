@@ -483,7 +483,7 @@
                                         </div>
 
 
-
+{{-- 
                                         <div class="col-md-6">
 
                                             <div class="form-group">
@@ -495,7 +495,7 @@
                                             </div>
 
 
-                                        </div> <!-- end col md 4 -->
+                                        </div> <!-- end col md 4 --> --}}
 
 
 

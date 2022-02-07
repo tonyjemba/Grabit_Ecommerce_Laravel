@@ -94,7 +94,7 @@ class ProductController extends Controller
       
             }
       
-            ////////// Een Multiple Image Upload Start ///////////
+            ////////// End Multiple Image Upload Start ///////////
       
       
              $notification = array(
@@ -102,7 +102,7 @@ class ProductController extends Controller
                   'alert-type' => 'success'
               );
       
-              return redirect()->route('manage-product')->with($notification);
+              return redirect()->back()->with($notification);
 
     }
 }
