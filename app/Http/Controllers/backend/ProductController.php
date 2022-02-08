@@ -28,9 +28,9 @@ class ProductController extends Controller
 
 	public function StoreProduct(Request $request){
 
-    // $request->validate([
-    //   'file' => 'required|mimes:jpeg,png,jpg,zip,pdf|max:2048',
-    // ]);
+    $request->validate([
+      'file' => 'required|mimes:jpeg,png,jpg,zip,pdf|max:2048',
+    ]);
 
     // if ($files = $request->file('file')) {
     //   $destinationPath = 'upload/pdf'; // upload path
@@ -122,7 +122,16 @@ class ProductController extends Controller
     return view('backend.product.product_view',compact('products'));
   }
 
+public function EditProduct($id){
+	$multiImgs = MultiImg::where('product_id',$id)->get();
 
+		$categories = Category::latest()->get();
+		$brands = Brand::latest()->get();
+		$subcategory = SubCategory::latest()->get();
+		$subsubcategory = SubSubCategory::latest()->get();
+		$products = Product::findOrFail($id);
+		return view('backend.product.product_edit',compact('categories','brands','subcategory','subsubcategory','products','multiImgs'));
+}
 
 
 
