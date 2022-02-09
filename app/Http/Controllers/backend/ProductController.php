@@ -252,7 +252,7 @@ public function ThambnailImageUpdate(Request $request){
    return redirect()->back()->with($notification);
  }
 
- public function ProductInactive(){
+ public function ProductInactive($id){
 	Product::findOrFail($id)->update(['status' => 0]);
 	$notification = array(
 	   'message' => 'Product Inactive',
