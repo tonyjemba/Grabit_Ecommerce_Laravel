@@ -261,4 +261,14 @@ public function ThambnailImageUpdate(Request $request){
 
    return redirect()->back()->with($notification);
  }
+
+ public function ProductActive($id){
+	Product::findOrFail($id)->update(['status' => 1]);
+	$notification = array(
+	   'message' => 'Product Active',
+	   'alert-type' => 'success'
+   );
+
+   return redirect()->back()->with($notification);
+ }
 }
