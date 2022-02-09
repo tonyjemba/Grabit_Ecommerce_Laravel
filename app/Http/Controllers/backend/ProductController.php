@@ -214,7 +214,7 @@ public function MultiImageUpdate(Request $request){
 	return redirect()->back()->with($notification);
 }
 public function ThambnailImageUpdate(Request $request){
-	
+
 	$pro_id = $request->id;
 	$oldImage = $request->old_img;
 	unlink($oldImage);
@@ -238,6 +238,18 @@ public function ThambnailImageUpdate(Request $request){
 	   return redirect()->back()->with($notification);
 
 }
+ public function MultiImageDelete($id){
 
+	$oldimg = MultiImg::findOrFail($id);
+	unlink($oldimg->photo_name);
+	MultiImg::findOrFail($id)->delete();
+
+	$notification = array(
+	   'message' => 'Product Image Deleted Successfully',
+	   'alert-type' => 'success'
+   );
+
+   return redirect()->back()->with($notification);
+ }
 
 }
