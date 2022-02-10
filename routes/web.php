@@ -32,6 +32,12 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
 	Route::post('/login',[AdminController::class, 'store'])->name('admin.login');
 });
 
+//protecting admin routes
+Route::middleware(['auth:admin'])->group(function(){
+
+    Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
+        return view('admin.index');
+    })->name('dashboard')->middleware('auth:admin');
 
 Route::get('/admin/login', [AdminController::class, 'destroy'])->name('admin.logout');
 Route::get('/admin/profile',[AdminProfileController::class,'profile'])->name('admin.profile');
@@ -40,6 +46,8 @@ Route::post('/admin/profile/store',[AdminProfileController::class,'store'])->nam
 Route::get('admin/change/password',[AdminProfileController::class,'changepassword'])->name('admin.changepassword');
 Route::post('admin/change/password/trigger',[AdminProfileController::class,'addupdatedpassword'])->name('update.admin.change.password');
 
+
+});
 //admin All Brands routes
 Route::prefix('brand')->group(function(){
     Route::get("/view",[BrandController::class,"brandview" ])->name('all.brand');
@@ -137,9 +145,7 @@ Route::prefix('slider')->group(function(){
     
     });
     
-Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
-    return view('admin.index');
-})->name('dashboard');
+
 
 
 //users frontend
