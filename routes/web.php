@@ -113,6 +113,28 @@ Route::prefix('product')->group(function(){
     Route::get('/delete/{id}', [ProductController::class, 'ProductDelete'])->name('product.delete');
      
     });
+
+    
+
+// Admin Slider All Routes 
+
+Route::prefix('slider')->group(function(){
+
+    Route::get('/view', [SliderController::class, 'SliderView'])->name('manage-slider');
+    
+    Route::post('/store', [SliderController::class, 'SliderStore'])->name('slider.store');
+    
+    Route::get('/edit/{id}', [SliderController::class, 'SliderEdit'])->name('slider.edit');
+    
+    Route::post('/update', [SliderController::class, 'SliderUpdate'])->name('slider.update');
+    
+    Route::get('/delete/{id}', [SliderController::class, 'SliderDelete'])->name('slider.delete');
+    
+    Route::get('/inactive/{id}', [SliderController::class, 'SliderInactive'])->name('slider.inactive');
+    
+    Route::get('/active/{id}', [SliderController::class, 'SliderActive'])->name('slider.active');
+    
+    });
     
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
