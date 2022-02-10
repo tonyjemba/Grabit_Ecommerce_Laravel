@@ -122,7 +122,7 @@ class SliderController extends Controller
 		return redirect()->back()->with($notification);
     }
 
-    public function SliderActive(){
+    public function SliderActive($id){
         Slider::findOrFail($id)->update(['status' => 1]);
 
     	$notification = array(
