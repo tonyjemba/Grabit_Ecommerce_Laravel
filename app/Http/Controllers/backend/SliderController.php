@@ -43,4 +43,9 @@ class SliderController extends Controller
 
 		return redirect()->back()->with($notification);
     }
+
+    public function SliderEdit($id){
+        $sliders = Slider::findOrFail($id);
+		return view('backend.slider.slider_edit',compact('sliders'));
+    }
 }
