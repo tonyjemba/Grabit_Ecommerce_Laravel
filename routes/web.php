@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\SubCategoryController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\Frontend\UserController;
 use Illuminate\Support\Facades\Auth;
 
@@ -163,3 +164,8 @@ Route::post("user/change/passwordfield",[IndexController::class,"updatepassword"
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+//Frontend all routes
+Route::get('language/english',[LanguageController::class,'english']);
+Route::get('language/hindi',[LanguageController::class,'hindi']);
