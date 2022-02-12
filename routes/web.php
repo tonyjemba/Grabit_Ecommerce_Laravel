@@ -167,5 +167,9 @@ Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function 
 
 
 //Frontend all routes
-Route::get('language/english',[LanguageController::class,'english']);
-Route::get('language/hindi',[LanguageController::class,'hindi']);
+
+/// Multi Language All Routes ////
+
+Route::get('/language/hindi', [LanguageController::class, 'Hindi'])->name('hindi.language');
+
+Route::get('/language/english', [LanguageController::class, 'English'])->name('english.language');

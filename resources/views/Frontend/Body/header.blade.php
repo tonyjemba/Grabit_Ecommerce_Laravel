@@ -37,7 +37,7 @@
                                 data-toggle="dropdown"><span class="value">Language </span><b
                                     class="caret"></b></a>
                             <ul class="dropdown-menu">
-                              @if (session()->get('languange') == 'hindi')
+                              @if (session()->get('language') == 'hindi')
                               <li><a href="{{ route('english.language') }}">English</a></li>
                               @else
                               <li><a href="{{ route('hindi.language') }}">हिन्दी</a></li>
