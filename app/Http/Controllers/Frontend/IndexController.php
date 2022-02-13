@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\MultiImg;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\User;
@@ -14,44 +15,48 @@ use Illuminate\Support\Facades\Hash;
 
 class IndexController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         // $blogpost = BlogPost::latest()->get();
-    	$products = Product::where('status',1)->orderBy('id','DESC')->limit(6)->get();
-    	$sliders = Slider::where('status',1)->orderBy('id','DESC')->limit(3)->get();
-    	$categories = Category::orderBy('category_name_en','ASC')->get();
+        $products = Product::where('status', 1)->orderBy('id', 'DESC')->limit(6)->get();
+        $sliders = Slider::where('status', 1)->orderBy('id', 'DESC')->limit(3)->get();
+        $categories = Category::orderBy('category_name_en', 'ASC')->get();
 
-    	$featured = Product::where('featured',1)->orderBy('id','DESC')->limit(6)->get();
-    	$hot_deals = Product::where('hot_deals',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(3)->get();
+        $featured = Product::where('featured', 1)->orderBy('id', 'DESC')->limit(6)->get();
+        $hot_deals = Product::where('hot_deals', 1)->where('discount_price', '!=', NULL)->orderBy('id', 'DESC')->limit(3)->get();
 
-    	$special_offer = Product::where('special_offer',1)->orderBy('id','DESC')->limit(6)->get();
+        $special_offer = Product::where('special_offer', 1)->orderBy('id', 'DESC')->limit(6)->get();
 
-    	$special_deals = Product::where('special_deals',1)->orderBy('id','DESC')->limit(3)->get();
+        $special_deals = Product::where('special_deals', 1)->orderBy('id', 'DESC')->limit(3)->get();
 
-    	$skip_category_0 = Category::skip(0)->first();
-    	$skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->get();
+        $skip_category_0 = Category::skip(0)->first();
+        $skip_product_0 = Product::where('status', 1)->where('category_id', $skip_category_0->id)->orderBy('id', 'DESC')->get();
 
-    	$skip_category_1 = Category::skip(1)->first();
-    	$skip_product_1 = Product::where('status',1)->where('category_id',$skip_category_1->id)->orderBy('id','DESC')->get();
+        $skip_category_1 = Category::skip(1)->first();
+        $skip_product_1 = Product::where('status', 1)->where('category_id', $skip_category_1->id)->orderBy('id', 'DESC')->get();
 
-    	$skip_brand_1 = Brand::skip(1)->first();
-    	$skip_brand_product_1 = Product::where('status',1)->where('brand_id',$skip_brand_1->id)->orderBy('id','DESC')->get();
+        $skip_brand_1 = Brand::skip(1)->first();
+        $skip_brand_product_1 = Product::where('status', 1)->where('brand_id', $skip_brand_1->id)->orderBy('id', 'DESC')->get();
 
 
-        return view('Frontend.index',compact('categories','sliders','products','featured','hot_deals','special_offer','special_deals','skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_brand_1','skip_brand_product_1'));
+        return view('Frontend.index', compact('categories', 'sliders', 'products', 'featured', 'hot_deals', 'special_offer', 'special_deals', 'skip_category_0', 'skip_product_0', 'skip_category_1', 'skip_product_1', 'skip_brand_1', 'skip_brand_product_1'));
     }
-    public function userLogout(){
+    public function userLogout()
+    {
         Auth::logout();
 
         return Redirect()->route('login');
     }
-    public function userprofilefields(){
+    public function userprofilefields()
+    {
         $loggedinUserId = Auth::user()->id;
 
         $user = User::find($loggedinUserId);
 
-        return view('Frontend.profile.user_profile_fields',compact('user'));
+        return view('Frontend.profile.user_profile_fields', compact('user'));
     }
-    public function update(Request $request){
+    public function update(Request $request)
+    {
 
         $data = User::find(Auth::user()->id);
 
@@ -59,14 +64,13 @@ class IndexController extends Controller
         $data->email = $request->email;
         $data->phone = $request->phone;
 
-        if($request->file('profile_photo_path')){
+        if ($request->file('profile_photo_path')) {
             $file = $request->file('profile_photo_path');
             // @unlink(public_path('upload/admin_images'));
-            $filename = date('YmdHi').'.'.$file->getClientOriginalExtension();
-            $file->move(public_path('upload/user_images'),$filename);
+            $filename = date('YmdHi') . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('upload/user_images'), $filename);
 
             $data->profile_photo_path = $filename;
-
         }
         $data->save();
 
@@ -76,25 +80,26 @@ class IndexController extends Controller
         );
 
         return Redirect()->route('dashboard');
-
     }
 
-    public function changepassword(){
+    public function changepassword()
+    {
         $loggedinUserId = Auth::user()->id;
 
         $user = User::find($loggedinUserId);
-        return view('Frontend.profile.change_password',compact('user'));
+        return view('Frontend.profile.change_password', compact('user'));
     }
 
-    public function updatepassword(Request $request){
+    public function updatepassword(Request $request)
+    {
         $request->validate([
-            "oldpassword"=> 'required',
-            "password"=>'required|confirmed'
+            "oldpassword" => 'required',
+            "password" => 'required|confirmed'
         ]);
 
         $hashed_old_password = Auth::user()->password;
 
-        if(Hash::check($request->oldpassword,$hashed_old_password)){
+        if (Hash::check($request->oldpassword, $hashed_old_password)) {
 
             $user = User::find(Auth::user()->id);
 
@@ -102,9 +107,30 @@ class IndexController extends Controller
             $user->save();
             Auth::logout();
             return Redirect()->route('user.logout');
-
         }
 
         return Redirect()->back();
+    }
+
+    public function ProductDetails($id,$slug){
+        $product = Product::findOrFail($id);
+
+		$color_en = $product->product_color_en;
+		$product_color_en = explode(',', $color_en);
+
+		$color_hin = $product->product_color_hin;
+		$product_color_hin = explode(',', $color_hin);
+
+		$size_en = $product->product_size_en;
+		$product_size_en = explode(',', $size_en);
+
+		$size_hin = $product->product_size_hin;
+		$product_size_hin = explode(',', $size_hin);
+
+		$multiImag = MultiImg::where('product_id',$id)->get();
+
+		$cat_id = $product->category_id;
+		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
+	 	return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_hin','product_size_en','product_size_hin','relatedProduct'));
     }
 }
