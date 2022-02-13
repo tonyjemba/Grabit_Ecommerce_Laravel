@@ -196,7 +196,9 @@
 
 
                                 <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" data-hover="dropdown"
-                                        class="dropdown-toggle" data-toggle="dropdown">Home</a> </li>
+                                        class="dropdown-toggle" data-toggle="dropdown">
+                                        @if(session()->get('language') == 'hindi') घर @else Home @endif
+                                    </a> </li>
 
                                 {{-- //getting categories since this page is not connected to any controller we shall use php// --}}
                                 @php
