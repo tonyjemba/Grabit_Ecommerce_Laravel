@@ -116,25 +116,26 @@ class IndexController extends Controller
         return Redirect()->back();
     }
 
-    public function ProductDetails($id,$slug){
+    public function ProductDetails($id, $slug)
+    {
         $product = Product::findOrFail($id);
 
-		$color_en = $product->product_color_en;
-		$product_color_en = explode(',', $color_en);
+        $color_en = $product->product_color_en;
+        $product_color_en = explode(',', $color_en);
 
-		$color_hin = $product->product_color_hin;
-		$product_color_hin = explode(',', $color_hin);
+        $color_hin = $product->product_color_hin;
+        $product_color_hin = explode(',', $color_hin);
 
-		$size_en = $product->product_size_en;
-		$product_size_en = explode(',', $size_en);
+        $size_en = $product->product_size_en;
+        $product_size_en = explode(',', $size_en);
 
-		$size_hin = $product->product_size_hin;
-		$product_size_hin = explode(',', $size_hin);
+        $size_hin = $product->product_size_hin;
+        $product_size_hin = explode(',', $size_hin);
 
-		$multiImag = MultiImg::where('product_id',$id)->get();
+        $multiImag = MultiImg::where('product_id', $id)->get();
 
-		$cat_id = $product->category_id;
-		$relatedProduct = Product::where('category_id',$cat_id)->where('id','!=',$id)->orderBy('id','DESC')->get();
-	 	return view('frontend.product.product_details',compact('product','multiImag','product_color_en','product_color_hin','product_size_en','product_size_hin','relatedProduct'));
+        $cat_id = $product->category_id;
+        $relatedProduct = Product::where('category_id', $cat_id)->where('id', '!=', $id)->orderBy('id', 'DESC')->get();
+        return view('frontend.product.product_details', compact('product', 'multiImag', 'product_color_en', 'product_color_hin', 'product_size_en', 'product_size_hin', 'relatedProduct'));
     }
 }
