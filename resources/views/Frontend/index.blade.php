@@ -264,23 +264,7 @@
                     <!-- /.sidebar-widget -->
                     <!-- ============================================== SPECIAL OFFER : END ============================================== -->
                     <!-- ============================================== PRODUCT TAGS ============================================== -->
-                    <div class="sidebar-widget product-tag wow fadeInUp">
-                        <h3 class="section-title">Product tags</h3>
-                        <div class="sidebar-widget-body outer-top-xs">
-                            <div class="tag-list"> <a class="item" title="Phone"
-                                    href="category.html">Phone</a> <a class="item active" title="Vest"
-                                    href="category.html">Vest</a> <a class="item" title="Smartphone"
-                                    href="category.html">Smartphone</a> <a class="item" title="Furniture"
-                                    href="category.html">Furniture</a> <a class="item" title="T-shirt"
-                                    href="category.html">T-shirt</a> <a class="item" title="Sweatpants"
-                                    href="category.html">Sweatpants</a> <a class="item" title="Sneaker"
-                                    href="category.html">Sneaker</a> <a class="item" title="Toys"
-                                    href="category.html">Toys</a> <a class="item" title="Rose"
-                                    href="category.html">Rose</a> </div>
-                            <!-- /.tag-list -->
-                        </div>
-                        <!-- /.sidebar-widget-body -->
-                    </div>
+                  @include('Frontend.common.product_tags')
                     <!-- /.sidebar-widget -->
                     <!-- ============================================== PRODUCT TAGS : END ============================================== -->
                     <!-- ============================================== SPECIAL DEALS ============================================== -->
@@ -511,7 +495,7 @@
                                             data-toggle="tab">{{ $category->category_name_en }}</a></li>
                                 @endforeach
                                 <!-- <li><a data-transition-type="backSlide" href="#laptop" data-toggle="tab">Electronics</a></li>
-                                        <li><a data-transition-type="backSlide" href="#apple" data-toggle="tab">Shoes</a></li> -->
+                                            <li><a data-transition-type="backSlide" href="#apple" data-toggle="tab">Shoes</a></li> -->
                             </ul>
                             <!-- /.nav-tabs -->
                         </div>
@@ -1423,7 +1407,108 @@
                     </div>
                     <!-- /.sidebar-widget -->
                     <!-- ============================================== BEST SELLER : END ============================================== -->
+                    {{-- showing products of specific brand --}}
+                    <section class="section featured-product wow fadeInUp">
+                        <h3 class="section-title">
+                            @if (session()->get('language') == 'hindi') {{ $skip_brand_1->brand_name_hin }} @else {{ $skip_brand_1->brand_name_en }} @endif
+                        </h3>
+                        <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
 
+
+                            @foreach ($skip_brand_product_1 as $product)
+                                <div class="item item-carousel">
+                                    <div class="products">
+                                        <div class="product">
+                                            <div class="product-image">
+                                                <div class="image"> <a
+                                                        href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}"><img
+                                                            src="{{ asset($product->product_thambnail) }}" alt=""></a>
+                                                </div>
+                                                <!-- /.image -->
+
+                                                @php
+                                                    $amount = $product->selling_price - $product->discount_price;
+                                                    $discount = ($amount / $product->selling_price) * 100;
+                                                @endphp
+
+                                                <div>
+                                                    @if ($product->discount_price == null)
+                                                        <div class="tag new"><span>new</span></div>
+                                                    @else
+                                                        <div class="tag hot">
+                                                            <span>{{ round($discount) }}%</span></div>
+                                                    @endif
+                                                </div>
+                                            </div>
+
+                                            <!-- /.product-image -->
+
+                                            <div class="product-info text-left">
+                                                <h3 class="name"><a
+                                                        href="{{ url('product/details/' . $product->id . '/' . $product->product_slug_en) }}">
+                                                        @if (session()->get('language') == 'hindi') {{ $product->product_name_hin }} @else {{ $product->product_name_en }} @endif
+                                                    </a></h3>
+                                                <div class="rating rateit-small"></div>
+                                                <div class="description"></div>
+
+                                                @if ($product->discount_price == null)
+                                                    <div class="product-price"> <span class="price">
+                                                            ${{ $product->selling_price }} </span> </div>
+                                                @else
+                                                    <div class="product-price"> <span class="price">
+                                                            ${{ $product->discount_price }} </span> <span
+                                                            class="price-before-discount">$
+                                                            {{ $product->selling_price }}</span> </div>
+                                                @endif
+
+
+                                                <!-- /.product-price -->
+
+                                            </div>
+                                            <!-- /.product-info -->
+                                            <div class="cart clearfix animate-effect">
+                                                <div class="action">
+                                                    <ul class="list-unstyled">
+                                                        <li class="add-cart-button btn-group">
+
+                                                            <button class="btn btn-primary icon" type="button"
+                                                                title="Add Cart" data-toggle="modal"
+                                                                data-target="#exampleModal" id="{{ $product->id }}"
+                                                                onclick="productView(this.id)"> <i
+                                                                    class="fa fa-shopping-cart"></i> </button>
+
+                                                            <button class="btn btn-primary cart-btn" type="button">Add to
+                                                                cart</button>
+                                                        </li>
+
+
+
+                                                        <button class="btn btn-primary icon" type="button" title="Wishlist"
+                                                            id="{{ $product->id }}" onclick="addToWishList(this.id)"> <i
+                                                                class="fa fa-heart"></i> </button>
+
+                                                        <li class="lnk"> <a data-toggle="tooltip"
+                                                                class="add-to-cart" href="detail.html" title="Compare">
+                                                                <i class="fa fa-signal" aria-hidden="true"></i> </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- /.action -->
+                                            </div>
+                                            <!-- /.cart -->
+                                        </div>
+                                        <!-- /.product -->
+
+                                    </div>
+                                    <!-- /.products -->
+                                </div>
+                                <!-- /.item -->
+                            @endforeach
+
+
+                        </div>
+                        <!-- /.home-owl-carousel -->
+                    </section>
                     <!-- ============================================== BLOG SLIDER ============================================== -->
                     <section class="section latest-blog outer-bottom-vs wow fadeInUp">
                         <h3 class="section-title">latest form blog</h3>
