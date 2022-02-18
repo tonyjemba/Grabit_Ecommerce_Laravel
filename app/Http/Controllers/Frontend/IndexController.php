@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\MultiImg;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\SubCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -148,4 +149,24 @@ class IndexController extends Controller
 		return view('frontend.tags.tags_view',compact('products','categories'));
 
 	}
+
+    public function SubCatWiseProduct(Request $request, $subcat_id,$slug){
+        $products = Product::where('status',1)->where('subcategory_id',$subcat_id)->orderBy('id','DESC')->paginate(3);
+		$categories = Category::orderBy('category_name_en','ASC')->get();
+
+		$breadsubcat = SubCategory::with(['category'])->where('id',$subcat_id)->get();
+
+
+		///  Load More Product with Ajax 
+		if ($request->ajax()) {
+   $grid_view = view('frontend.product.grid_view_product',compact('products'))->render();
+
+   $list_view = view('frontend.product.list_view_product',compact('products'))->render();
+	return response()->json(['grid_view' => $grid_view,'list_view',$list_view]);	
+
+		}
+		///  End Load More Product with Ajax 
+
+		return view('frontend.product.subcategory_view',compact('products','categories','breadsubcat'));
+    }
 }
