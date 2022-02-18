@@ -173,7 +173,7 @@
 
                         <!----------- Testimonials------------->
 
-                        {{-- @include('frontend.common.testimonials') --}}
+                        @include('frontend.common.testimonials')
                         <!-- == ========== Testimonials: END ======== ========= -->
 
 
