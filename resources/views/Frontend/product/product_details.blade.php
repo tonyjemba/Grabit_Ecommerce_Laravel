@@ -37,7 +37,7 @@
 
 
                     <!-- ====== === HOT DEALS ==== ==== -->
-                    {{-- @include('frontend.common.hot_deals') --}}
+                    @include('frontend.common.hot_deals')
                     <!-- ===== ===== HOT DEALS: END ====== ====== -->
 
                     <!-- ============================================== NEWSLETTER ============================================== -->
