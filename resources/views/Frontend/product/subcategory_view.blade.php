@@ -325,7 +325,7 @@
                                 <div class="row" id="grid_view_product">
 
 
-                                    {{-- @include('frontend.product.grid_view_product') --}}
+                                    @include('frontend.product.grid_view_product')
 
 
 
@@ -351,7 +351,7 @@
 
 
 
-                                {{-- @include('frontend.product.list_view_product') --}}
+                                @include('frontend.product.list_view_product')
 
                             </div>
                             <!-- /.category-product -->
