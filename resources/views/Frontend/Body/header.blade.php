@@ -6,15 +6,25 @@
             <div class="header-top-inner">
                 <div class="cnt-account">
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class="icon fa fa-user"></i>@if (session()->get('language') == 'hindi') मेरी प्रोफाइल @else My Account @endif</a></li>
+                        <li><a href="#"><i class="icon fa fa-user"></i>
+                                @if (session()->get('language') == 'hindi')
+                                मेरी प्रोफाइल @else My Account
+                                @endif
+                            </a></li>
                         <li><a href="#"><i class="icon fa fa-heart"></i>
-                                @if (session()->get('language') == 'hindi') इच्छा-सूची @else Wishlist  @endif
+                                @if (session()->get('language') == 'hindi')
+                                इच्छा-सूची @else Wishlist
+                                @endif
                             </a></li>
                         <li><a href="#"><i class="icon fa fa-shopping-cart"></i>
-                                @if (session()->get('language') == 'hindi') मेरी गाड़ी @else My Cart @endif
+                                @if (session()->get('language') == 'hindi')
+                                मेरी गाड़ी @else My Cart
+                                @endif
                             </a></li>
                         <li><a href="#"><i class="icon fa fa-check"></i>
-                                @if (session()->get('language') == 'hindi') चेक आउट @else Checkout  @endif
+                                @if (session()->get('language') == 'hindi')
+                                चेक आउट @else Checkout
+                                @endif
                             </a></li>
                         @auth
                             <li><a href="{{ Auth::check() ? route('user.logout') : route('login') }}"><i
@@ -22,7 +32,9 @@
 
                         @else
                             <li><a href="{{ route('login') }}"><i class="icon fa fa-lock"></i>
-                                    @if (session()->get('language') == 'hindi') लॉग इन/रजिस्टर @else Login/Register  @endif
+                                    @if (session()->get('language') == 'hindi')
+                                    लॉग इन/रजिस्टर @else Login/Register
+                                    @endif
                                 </a></li>
 
                         @endauth
@@ -54,7 +66,6 @@
                                     <li><a href="{{ route('english.language') }}">English</a></li>
                                 @else
                                     <li><a href="{{ route('hindi.language') }}">हिन्दी</a></li>
-
                                 @endif
 
                             </ul>
@@ -122,36 +133,28 @@
                             data-toggle="dropdown">
                             <div class="items-cart-inner">
                                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
-                                <div class="basket-item-count"><span class="count">2</span></div>
-                                <div class="total-price-basket"> <span class="lbl">cart -</span> <span
-                                        class="total-price"> <span class="sign">$</span><span
-                                            class="value">600.00</span> </span> </div>
+                                <div class="basket-item-count"><span class="count" id="cartQty"> </span></div>
+                                <div class="total-price-basket"> <span class="lbl">cart -</span>
+                                    <span class="total-price"> <span class="sign">$</span>
+                                        <span class="value" id="cartSubTotal"> </span> </span>
+                                </div>
                             </div>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <div class="cart-item product-summary">
-                                    <div class="row">
-                                        <div class="col-xs-4">
-                                            <div class="image"> <a href="detail.html"><img
-                                                        src="{{ asset('frontend/assets/images/cart.jpg') }}"
-                                                        alt=""></a> </div>
-                                        </div>
-                                        <div class="col-xs-7">
-                                            <h3 class="name"><a href="index.php?page-detail">Simple
-                                                    Product</a></h3>
-                                            <div class="price">$600.00</div>
-                                        </div>
-                                        <div class="col-xs-1 action"> <a href="#"><i class="fa fa-trash"></i></a>
-                                        </div>
-                                    </div>
+                                <!--   // Mini Cart Start with Ajax -->
+
+                                <div id="miniCart">
+
                                 </div>
-                                <!-- /.cart-item -->
-                                <div class="clearfix"></div>
-                                <hr>
+
+                                <!--   // End Mini Cart Start with Ajax -->
+
+
                                 <div class="clearfix cart-total">
-                                    <div class="pull-right"> <span class="text">Sub Total :</span><span
-                                            class='price'>$600.00</span> </div>
+                                    <div class="pull-right"> <span class="text">Sub Total :</span>
+                                        <span class='price' id="cartSubTotal"> </span>
+                                    </div>
                                     <div class="clearfix"></div>
                                     <a href="checkout.html"
                                         class="btn btn-upper btn-primary btn-block m-t-20">Checkout</a>
@@ -162,6 +165,8 @@
                         </ul>
                         <!-- /.dropdown-menu-->
                     </div>
+                    <!-- /.dropdown-cart -->
+
                     <!-- /.dropdown-cart -->
 
                     <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= -->
@@ -197,7 +202,9 @@
 
                                 <li class="active dropdown yamm-fw"> <a href="{{ url('/') }}" data-hover="dropdown"
                                         class="dropdown-toggle" data-toggle="dropdown">
-                                        @if(session()->get('language') == 'hindi') घर @else Home @endif
+                                        @if (session()->get('language') == 'hindi')
+                                        घर @else Home
+                                        @endif
                                     </a> </li>
 
                                 {{-- //getting categories since this page is not connected to any controller we shall use php// --}}
@@ -208,7 +215,10 @@
                                 @foreach ($categories as $category)
                                     <li class="dropdown yamm mega-menu"> <a href="home.html" data-hover="dropdown"
                                             class="dropdown-toggle" data-toggle="dropdown">
-                                            @if (session()->get('language') == 'hindi') {{ $category->category_name_hin }} @else {{ $category->category_name_en }} @endif
+                                            @if (session()->get('language') == 'hindi')
+                                            {{ $category->category_name_hin }} @else
+                                                {{ $category->category_name_en }}
+                                            @endif
                                         </a>
                                         <ul class="dropdown-menu container">
                                             <li>
@@ -228,7 +238,11 @@
                                                                 <a
                                                                     href="{{ url('subcategory/product/' . $subcategory->id . '/' . $subcategory->subcategory_slug_en) }}">
                                                                     <h2 class="title">
-                                                                        @if (session()->get('language') == 'hindi') {{ $subcategory->subcategory_name_hin }} @else {{ $subcategory->subcategory_name_en }} @endif
+                                                                        @if (session()->get('language') == 'hindi')
+                                                                            {{ $subcategory->subcategory_name_hin }}
+                                                                        @else
+                                                                            {{ $subcategory->subcategory_name_en }}
+                                                                        @endif
                                                                     </h2>
                                                                 </a>
 
@@ -244,7 +258,11 @@
                                                                     <ul class="links">
                                                                         <li><a
                                                                                 href="{{ url('subsubcategory/product/' . $subsubcategory->id . '/' . $subsubcategory->subsubcategory_slug_en) }}">
-                                                                                @if (session()->get('language') == 'hindi') {{ $subsubcategory->subsubcategory_name_hin }} @else {{ $subsubcategory->subsubcategory_name_en }} @endif
+                                                                                @if (session()->get('language') == 'hindi')
+                                                                                    {{ $subsubcategory->subsubcategory_name_hin }}
+                                                                                @else
+                                                                                    {{ $subsubcategory->subsubcategory_name_en }}
+                                                                                @endif
                                                                             </a></li>
 
                                                                     </ul>
