@@ -115,7 +115,7 @@
 
                             <ul class="list-group">
                                 <li class="list-group-item">Product Price: <strong class="text-danger">$<span
-                                            id="pprice"></span></strong>
+                                            id="price"></span></strong>
                                     <del id="oldprice">$</del>
                                 </li>
                                 <li class="list-group-item">Product Code: <strong id="pcode"></strong></li>
@@ -188,8 +188,8 @@
                 type: 'GET',
                 url: '/product/view/modal/' + id,
                 dataType: 'json',
+               
                 success: function(data) {
-                    // console.log(data)
                     $('#pname').text(data.product.product_name_en);
                     $('#price').text(data.product.selling_price);
                     $('#pcode').text(data.product.product_code);
@@ -240,50 +240,7 @@
 
         }
         // Eend Product View with Modal 
-        // Start Add To Cart Product 
-        function addToCart() {
-            var product_name = $('#pname').text();
-            var id = $('#product_id').val();
-            var color = $('#color option:selected').text();
-            var size = $('#size option:selected').text();
-            var quantity = $('#qty').val();
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                data: {
-                    color: color,
-                    size: size,
-                    quantity: quantity,
-                    product_name: product_name
-                },
-                url: "/cart/data/store/" + id,
-                success: function(data) {
-                    miniCart()
-                    $('#closeModel').click();
-                    // console.log(data)
-                    // Start Message 
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'success',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                    if ($.isEmptyObject(data.error)) {
-                        Toast.fire({
-                            type: 'success',
-                            title: data.success
-                        })
-                    } else {
-                        Toast.fire({
-                            type: 'error',
-                            title: data.error
-                        })
-                    }
-                    // End Message 
-                }
-            })
-        }
+
 
         // End Add To Cart Product 
     </script>
