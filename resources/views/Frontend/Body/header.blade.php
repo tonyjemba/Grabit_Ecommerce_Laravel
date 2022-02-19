@@ -134,7 +134,7 @@
                             <div class="items-cart-inner">
                                 <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
                                 <div class="basket-item-count"><span class="count" id="cartQty"> </span></div>
-                                <div class="total-price-basket"> <span class="lbl">cart -</span>
+                                <div class="total-price-basket"> <span class="lbl">cart</span>
                                     <span class="total-price"> <span class="sign">$</span>
                                         <span class="value" id="cartSubTotal"> </span> </span>
                                 </div>

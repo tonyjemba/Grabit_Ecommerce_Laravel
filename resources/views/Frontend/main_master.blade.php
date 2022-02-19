@@ -14,7 +14,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
-<meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- Customizable CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/blue.css') }}">
@@ -189,7 +189,7 @@
                 type: 'GET',
                 url: '/product/view/modal/' + id,
                 dataType: 'json',
-               
+
                 success: function(data) {
                     $('#pname').text(data.product.product_name_en);
                     $('#price').text(data.product.selling_price);
@@ -240,56 +240,55 @@
             })
 
         }
-    
+
         // End Add To Cart Product 
-// Start Add To Cart Product 
-function addToCart(){
-        var product_name = $('#pname').text();
-        var id = $('#product_id').val();
-        var color = $('#color option:selected').text();
-        var size = $('#size option:selected').text();
-        var quantity = $('#qty').val();
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            data:{
-                color:color, size:size, quantity:quantity, product_name:product_name
-            },
-            url: "/cart/data/store/"+id,
-            success:function(data){
-                // miniCart()
-                $('#closeModel').click();
+        // Start Add To Cart Product 
+        function addToCart() {
+            var product_name = $('#pname').text();
+            var id = $('#product_id').val();
+            var color = $('#color option:selected').text();
+            var size = $('#size option:selected').text();
+            var quantity = $('#qty').val();
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    color: color,
+                    size: size,
+                    quantity: quantity,
+                    product_name: product_name
+                },
+                url: "/cart/data/store/" + id,
+                success: function(data) {
+                    miniCart()
+                    $('#closeModel').click();
 
-                // Start Message 
-                const Toast = Swal.mixin({
-                      toast: true,
-                      position: 'top-end',
-                      icon: 'success',
-                      showConfirmButton: false,
-                      timer: 3000
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
                     })
-                if ($.isEmptyObject(data.error)) {
-                    Toast.fire({
-                        type: 'success',
-                        title: data.success
-                    })
-                }else{
-                    Toast.fire({
-                        type: 'error',
-                        title: data.error
-                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    // End Message 
                 }
-               // End Message 
-            }
-        })
-    }
-  
-// End Add To Cart Product 
+            })
+        }
 
-
-
+        // End Add To Cart Product 
     </script>
-
 <script type="text/javascript">
     function miniCart(){
        $.ajax({
@@ -358,13 +357,14 @@ miniCart();
 //  end mini cart remove 
 </script>
 
+
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        </script>
+    </script>
 
 </body>
 
