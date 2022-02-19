@@ -9,11 +9,12 @@
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Grabit Now!</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/bootstrap.min.css') }}">
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- Customizable CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/blue.css') }}">
@@ -256,28 +257,28 @@ function addToCart(){
             },
             url: "/cart/data/store/"+id,
             success:function(data){
-                miniCart()
-                $('#closeModel').click();
-                // console.log(data)
+                // miniCart()
+                // $('#closeModel').click();
+                console.log(data)
                 // Start Message 
-                const Toast = Swal.mixin({
-                      toast: true,
-                      position: 'top-end',
-                      icon: 'success',
-                      showConfirmButton: false,
-                      timer: 3000
-                    })
-                if ($.isEmptyObject(data.error)) {
-                    Toast.fire({
-                        type: 'success',
-                        title: data.success
-                    })
-                }else{
-                    Toast.fire({
-                        type: 'error',
-                        title: data.error
-                    })
-                }
+                // const Toast = Swal.mixin({
+                //       toast: true,
+                //       position: 'top-end',
+                //       icon: 'success',
+                //       showConfirmButton: false,
+                //       timer: 3000
+                //     })
+                // if ($.isEmptyObject(data.error)) {
+                //     Toast.fire({
+                //         type: 'success',
+                //         title: data.success
+                //     })
+                // }else{
+                //     Toast.fire({
+                //         type: 'error',
+                //         title: data.error
+                //     })
+                // }
                 // End Message 
             }
         })
@@ -287,6 +288,13 @@ function addToCart(){
 
 
     </script>
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        </script>
 </body>
 
 </html>
