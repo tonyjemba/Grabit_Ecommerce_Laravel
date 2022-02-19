@@ -12,9 +12,9 @@ class CartController extends Controller
 {
     public function AddToCart(Request $request, $id){
 
-    //     if (Session::has('coupon')) {
-    //       Session::forget('coupon');
-    //    }
+        if (Session::has('coupon')) {
+          Session::forget('coupon');
+       }
          
        $product = Product::findOrFail($id);
 
@@ -52,4 +52,20 @@ class CartController extends Controller
        }
 
    }
+
+   //add cart data to the mini cart in the header
+
+   public function AddMiniCart(){
+
+    $carts = Cart::content();
+    $cartQty = Cart::count();
+    $cartTotal = Cart::total();
+
+    return response()->json(array(
+        'carts' => $carts,
+        'cartQty' => $cartQty,
+        'cartTotal' => $cartTotal,
+
+    ));
+}
 }

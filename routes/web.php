@@ -193,3 +193,6 @@ Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax
 
 // Add to Cart Store Data
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+
+// Get get data to the  mini cart on the header
+Route::get('/product/mini/cart/', [CartController::class, 'AddMiniCart']);

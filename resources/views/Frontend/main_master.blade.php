@@ -287,7 +287,28 @@ function addToCart(){
 // End Add To Cart Product 
 
 
+
     </script>
+
+<script type="text/javascript">
+    function miniCart(){
+       $.ajax({
+           type: 'GET',
+           url: '/product/mini/cart',
+           dataType:'json',
+           success:function(response){
+         console.log(response);
+       });
+               
+               $('#miniCart').html(miniCart);
+           
+       })
+    }
+
+
+//  end mini cart remove 
+</script>
+
     <script type="text/javascript">
         $.ajaxSetup({
             headers: {
@@ -295,6 +316,7 @@ function addToCart(){
             }
         });
         </script>
+
 </body>
 
 </html>
