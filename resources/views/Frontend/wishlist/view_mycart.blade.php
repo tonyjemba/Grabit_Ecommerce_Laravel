@@ -36,7 +36,7 @@
                                 </tr>
                             </thead><!-- /thead -->
                             <tbody id="cartPage">
-
+                                    {{-- This is where the cart products will be loaded --}}
                             </tbody>
                         </table>
                     </div>

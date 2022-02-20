@@ -224,3 +224,6 @@ Route::get('/wishlist-remove/{id}', [WhishListController::class, 'RemoveWishlist
  // My Cart Page All Routes
  Route::get('/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
 
+ //geting the cart products to the cart page
+ Route::get('/user/get-cart-product', [CartPageController::class, 'GetCartProduct']);
+

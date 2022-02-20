@@ -289,18 +289,18 @@
 
         // End Add To Cart Product 
     </script>
-<script type="text/javascript">
-    function miniCart(){
-       $.ajax({
-           type: 'GET',
-           url: '/product/mini/cart',
-           dataType:'json',
-           success:function(response){
-               $('span[id="cartSubTotal"]').text(response.cartTotal);
-               $('#cartQty').text(response.cartQty);
-               var miniCart = ""
-               $.each(response.carts, function(key,value){
-                   miniCart += `<div class="cart-item product-summary">
+    <script type="text/javascript">
+        function miniCart() {
+            $.ajax({
+                type: 'GET',
+                url: '/product/mini/cart',
+                dataType: 'json',
+                success: function(response) {
+                    $('span[id="cartSubTotal"]').text(response.cartTotal);
+                    $('#cartQty').text(response.cartQty);
+                    var miniCart = ""
+                    $.each(response.carts, function(key, value) {
+                        miniCart += `<div class="cart-item product-summary">
          <div class="row">
            <div class="col-xs-4">
              <div class="image"> <a href="detail.html"><img src="/${value.options.image}" alt=""></a> </div>
@@ -316,69 +316,68 @@
        <!-- /.cart-item -->
        <div class="clearfix"></div>
        <hr>`
-       });
-               
-               $('#miniCart').html(miniCart);
-           }
-       })
-    }
-miniCart();
-/// mini cart remove Start 
-   function miniCartRemove(rowId){
-       $.ajax({
-           type: 'GET',
-           url: '/minicart/product-remove/'+rowId,
-           dataType:'json',
-           success:function(data){
-           miniCart();
-            // Start Message 
-               const Toast = Swal.mixin({
-                     toast: true,
-                     position: 'top-end',
-                     icon: 'success',
-                     showConfirmButton: false,
-                     timer: 3000
-                   })
-               if ($.isEmptyObject(data.error)) {
-                   Toast.fire({
-                       type: 'success',
-                       title: data.success
-                   })
-               }else{
-                   Toast.fire({
-                       type: 'error',
-                       title: data.error
-                   })
-               }
-               // End Message 
-           }
-       });
-   }
-//  end mini cart remove 
-</script>
-<script type="text/javascript">
-    
-    function addToWishList(product_id){
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: "/add-to-wishlist/"+product_id,
-            success:function(data){
-                 // Start Message 
+                    });
+
+                    $('#miniCart').html(miniCart);
+                }
+            })
+        }
+        miniCart();
+        /// mini cart remove Start 
+        function miniCartRemove(rowId) {
+            $.ajax({
+                type: 'GET',
+                url: '/minicart/product-remove/' + rowId,
+                dataType: 'json',
+                success: function(data) {
+                    miniCart();
+                    // Start Message 
                     const Toast = Swal.mixin({
-                          toast: true,
-                          position: 'top-end',
-                          
-                          showConfirmButton: false,
-                          timer: 3000
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success
                         })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error
+                        })
+                    }
+                    // End Message 
+                }
+            });
+        }
+        //  end mini cart remove 
+    </script>
+    <script type="text/javascript">
+        function addToWishList(product_id) {
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "/add-to-wishlist/" + product_id,
+                success: function(data) {
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
                     if ($.isEmptyObject(data.error)) {
                         Toast.fire({
                             type: 'success',
                             icon: 'success',
                             title: data.success
                         })
-                    }else{
+                    } else {
                         Toast.fire({
                             type: 'error',
                             icon: 'error',
@@ -386,22 +385,22 @@ miniCart();
                         })
                     }
                     // End Message 
-            }
-        })
-    } 
-    </script> 
+                }
+            })
+        }
+    </script>
 
 
-<script type="text/javascript">
-    function wishlist(){
-       $.ajax({
-           type: 'GET',
-           url: '/user/get-wishlist-product',
-           dataType:'json',
-           success:function(response){
-               var rows = ""
-               $.each(response, function(key,value){
-                   rows += `<tr>
+    <script type="text/javascript">
+        function wishlist() {
+            $.ajax({
+                type: 'GET',
+                url: '/user/get-wishlist-product',
+                dataType: 'json',
+                success: function(response) {
+                    var rows = ""
+                    $.each(response, function(key, value) {
+                        rows += `<tr>
                    <td class="col-md-2"><img src="/${value.product.product_thambnail} " alt="imga"></td>
                    <td class="col-md-7">
                        <div class="product-name"><a href="#">${value.product.product_name_en}</a></div>
@@ -422,49 +421,106 @@ miniCart();
            <button type="submit" class="" id="${value.id}" onclick="wishlistRemove(this.id)"><i class="fa fa-times"></i></button>
        </td>
                </tr>`
-       });
-               
-               $('#wishlist').html(rows);
-           }
-       })
-    }
-wishlist();
+                    });
 
- ///  Wishlist remove Start 
- function wishlistRemove(id){
-        $.ajax({
-            type: 'GET',
-            url: '/user/wishlist-remove/'+id,
-            dataType:'json',
-            success:function(data){
-            wishlist();
-             // Start Message 
-                const Toast = Swal.mixin({
-                      toast: true,
-                      position: 'top-end',
-                      
-                      showConfirmButton: false,
-                      timer: 3000
-                    })
-                if ($.isEmptyObject(data.error)) {
-                    Toast.fire({
-                        type: 'success',
-                        icon: 'success',
-                        title: data.success
-                    })
-                }else{
-                    Toast.fire({
-                        type: 'error',
-                        icon: 'error',
-                        title: data.error
-                    })
+                    $('#wishlist').html(rows);
                 }
-                // End Message 
-            }
-        });
-    }
+            })
+        }
+        wishlist();
 
-</script>  
+        ///  Wishlist remove Start 
+        function wishlistRemove(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/user/wishlist-remove/' + id,
+                dataType: 'json',
+                success: function(data) {
+                    wishlist();
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success
+                        })
+                    } else {
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error
+                        })
+                    }
+                    // End Message 
+                }
+            });
+        }
+    </script>
+
+    <!-- /// Load My Cart /// -->
+
+    <script type="text/javascript">
+        function cart() {
+            $.ajax({
+                type: 'GET',
+                url: '/user/get-cart-product',
+                dataType: 'json',
+                success: function(response) {
+                    var rows = ""
+                    $.each(response.carts, function(key, value) {
+                        rows += `<tr>
+       <td class="col-md-2"><img src="/${value.options.image} " alt="imga" style="width:60px; height:60px;"></td>
+       
+       <td class="col-md-2">
+           <div class="product-name"><a href="#">${value.name}</a></div>
+            
+           <div class="price"> 
+                           ${value.price}
+                       </div>
+                   </td>
+         <td class="col-md-2">
+           <strong>${value.options.color} </strong> 
+           </td>
+        <td class="col-md-2">
+         ${value.options.size == null
+           ? `<span> .... </span>`
+           :
+         `<strong>${value.options.size} </strong>` 
+         }           
+           </td>
+          <td class="col-md-2">
+          ${value.qty > 1
+           ? `<button type="submit" class="btn btn-danger btn-sm" id="${value.rowId}" onclick="cartDecrement(this.id)" >-</button> `
+           : `<button type="submit" class="btn btn-danger btn-sm" disabled >-</button> `
+           }
+       
+       <input type="text" value="${value.qty}" min="1" max="100" disabled="" style="width:25px;" >  
+        <button type="submit" class="btn btn-success btn-sm" id="${value.rowId}" onclick="cartIncrement(this.id)" >+</button>    
+        
+           </td>
+            <td class="col-md-2">
+           <strong>$${value.subtotal} </strong> 
+           </td>
+        
+       <td class="col-md-1 close-btn">
+           <button type="submit" class="" id="${value.rowId}" onclick="cartRemove(this.id)"><i class="fa fa-times"></i></button>
+       </td>
+               </tr>`
+                    });
+
+                    $('#cartPage').html(rows);
+                }
+            })
+        }
+        cart();
+    </script>
 
     <script type="text/javascript">
         $.ajaxSetup({
