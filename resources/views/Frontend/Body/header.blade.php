@@ -11,7 +11,7 @@
                                 मेरी प्रोफाइल @else My Account
                                 @endif
                             </a></li>
-                        <li><a href="#"><i class="icon fa fa-heart"></i>
+                        <li><a href="{{ route('wishlist') }}"><i class="icon fa fa-heart"></i>
                                 @if (session()->get('language') == 'hindi')
                                 इच्छा-सूची @else Wishlist
                                 @endif
