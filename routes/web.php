@@ -8,6 +8,7 @@ use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\SubCategoryController;
+use App\Http\Controllers\User\CartPageController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
@@ -219,4 +220,7 @@ Route::get('/wishlist', [WhishListController::class, 'ViewWishlist'])->name('wis
 // remove wishlist products
 Route::get('/wishlist-remove/{id}', [WhishListController::class, 'RemoveWishlistProduct']);
 });
+
+ // My Cart Page All Routes
+ Route::get('/mycart', [CartPageController::class, 'MyCart'])->name('mycart');
 

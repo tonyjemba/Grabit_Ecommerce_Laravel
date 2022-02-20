@@ -35,5 +35,5 @@ class UserRedirectIfAuthenticated
              return redirect()->route('login');
          } 
 
-    }yellopix.mtn.co.ug
+    }
 }
