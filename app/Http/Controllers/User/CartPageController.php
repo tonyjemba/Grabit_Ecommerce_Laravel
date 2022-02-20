@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartPageController extends Controller
 {
@@ -25,6 +26,16 @@ class CartPageController extends Controller
 
     	));
 
+    }
+
+    public function RemoveCartProduct($rowId){
+        Cart::remove($rowId);
+
+        if (Session::has('coupon')) {
+           Session::forget('coupon');
+        }
+
+        return response()->json(['success' => 'Successfully Remove From Cart']);
     }
 
 }
