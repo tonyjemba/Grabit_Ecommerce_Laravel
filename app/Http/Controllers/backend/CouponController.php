@@ -66,4 +66,17 @@ class CouponController extends Controller
 
 		return redirect()->route('manage-coupon')->with($notification);
         }
+
+        
+    public function CouponDelete($id){
+
+    	Coupon::findOrFail($id)->delete();
+    	$notification = array(
+			'message' => 'Coupon Deleted Successfully',
+			'alert-type' => 'info'
+		);
+
+		return redirect()->back()->with($notification);
+
+    }
 }
