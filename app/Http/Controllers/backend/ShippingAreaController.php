@@ -63,25 +63,52 @@ class ShippingAreaController extends Controller
         return redirect()->route('manage-division')->with($notification);
     }
 
-    public function DivisionDelete($id){
+    public function DivisionDelete($id)
+    {
 
-    	ShipDivision::findOrFail($id)->delete();
+        ShipDivision::findOrFail($id)->delete();
 
-    	$notification = array(
-			'message' => 'Division Deleted Successfully',
-			'alert-type' => 'info'
-		);
+        $notification = array(
+            'message' => 'Division Deleted Successfully',
+            'alert-type' => 'info'
+        );
 
-		return redirect()->back()->with($notification);
-
+        return redirect()->back()->with($notification);
     }
 
-    
+
     //// Start Ship District 
 
-    public function DistrictView(){
-        $division = ShipDivision::orderBy('division_name','ASC')->get();
-        $district = ShipDistrict::with('division')->orderBy('id','DESC')->get();
-            return view('backend.ship.district.view_district',compact('division','district'));
-        }
+    public function DistrictView()
+    {
+        $division = ShipDivision::orderBy('division_name', 'ASC')->get();
+        $district = ShipDistrict::with('division')->orderBy('id', 'DESC')->get();
+        return view('backend.ship.district.view_district', compact('division', 'district'));
+    }
+
+    public function DistrictStore(Request $request)
+    {
+
+        $request->validate([
+            'division_id' => 'required',
+            'district_name' => 'required',
+
+        ]);
+
+
+        ShipDistrict::insert([
+
+            'division_id' => $request->division_id,
+            'district_name' => $request->district_name,
+            'created_at' => Carbon::now(),
+
+        ]);
+
+        $notification = array(
+            'message' => 'District Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
 }
