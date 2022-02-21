@@ -148,4 +148,10 @@ public function CouponCalculation(){
 
     }
 }
+
+//remove coupon
+public function CouponRemove(){
+    Session::forget('coupon');
+    return response()->json(['success' => 'Coupon Remove Successfully']);
+}
 }
