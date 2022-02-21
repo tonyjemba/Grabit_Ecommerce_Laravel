@@ -164,4 +164,31 @@ class ShippingAreaController extends Controller
 		return view('backend.ship.state.view_state',compact('division','district','state'));
     }
 
+    public function StateStore(Request $request){
+
+    	$request->validate([
+    		'division_id' => 'required',  
+    		'district_id' => 'required', 
+    		'state_name' => 'required', 	 
+    	 
+    	]);
+
+        ShipState::insert([
+	 
+            'division_id' => $request->division_id,
+            'district_id' => $request->district_id,
+            'state_name' => $request->state_name,
+            'created_at' => Carbon::now(),
+    
+            ]);
+    
+            $notification = array(
+                'message' => 'State Inserted Successfully',
+                'alert-type' => 'success'
+            );
+    
+            return redirect()->back()->with($notification);
+    
+        }
+
 }
