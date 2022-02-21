@@ -528,11 +528,11 @@
             url: '/user/cart-remove/'+id,
             dataType:'json',
             success:function(data){
-            couponCalculation();
+            // couponCalculation();
             cart();
             miniCart();
-            $('#couponField').show();
-            $('#coupon_name').val('');
+            // $('#couponField').show();
+            // $('#coupon_name').val('');
              // Start Message 
                 const Toast = Swal.mixin({
                       toast: true,
