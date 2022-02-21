@@ -558,6 +558,35 @@
             }
         });
     }
+
+    //increase cart quantity
+    function cartIncrement(rowId){
+        $.ajax({
+            type:'GET',
+            url: "/cart-increment/"+rowId,
+            dataType:'json',
+            success:function(data){
+                // couponCalculation();
+                cart();
+                miniCart();
+            }
+        });
+    }
+
+    // decrement cart
+    
+    function cartDecrement(rowId){
+        $.ajax({
+            type:'GET',
+            url: "/cart-decrement/"+rowId,
+            dataType:'json',
+            success:function(data){
+                // couponCalculation();
+                cart();
+                miniCart();
+            }
+        });
+    }
     </script>
 
     <script type="text/javascript">
