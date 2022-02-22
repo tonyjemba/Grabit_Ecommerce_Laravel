@@ -19,8 +19,6 @@
 </div><!-- /.breadcrumb -->
 
 
-
-
 <div class="body-content">
     <div class="container">
         <div class="checkout-box ">
@@ -172,14 +170,8 @@
                         </div>
                         <!-- End checkout-step-01  -->
 
-
-
-
                     </div><!-- /.checkout-steps -->
                 </div>
-
-
-
 
                 <div class="col-md-4">
                     <!-- checkout-progress-sidebar -->
