@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\WhishListController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\User\CheckoutController;
 use Illuminate\Support\Facades\Auth;
 
 /*
