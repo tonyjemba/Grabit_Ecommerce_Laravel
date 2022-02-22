@@ -528,7 +528,7 @@
             url: '/user/cart-remove/'+id,
             dataType:'json',
             success:function(data){
-            // couponCalculation();
+            couponCalculation();
             cart();
             miniCart();
             // $('#couponField').show();
