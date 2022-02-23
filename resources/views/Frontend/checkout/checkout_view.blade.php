@@ -153,12 +153,6 @@
                                             </div> <!-- // end form group  -->
 
 
-
-
-
-
-
-
                                         </div>
                                         <!-- already-registered-login -->
 

@@ -127,10 +127,10 @@
                         <div class="panel-group">
                             <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="unicase-checkout-title">Select Payment Method</h4>
+                                    <h4 class="unicase-checkout-title">Proceed with payment</h4>
                                 </div>
 
-                                <form action="{{ route('stripe.order') }}" method="post" id="payment-form">
+                                <form action="" method="post" id="payment-form">
                                     @csrf
                                     <div class="form-row">
                                         <label for="card-element">
@@ -144,7 +144,7 @@
                                             <input type="hidden" name="district_id"
                                                 value="{{ $data['district_id'] }}">
                                             <input type="hidden" name="state_id" value="{{ $data['state_id'] }}">
-                                            <input type="hidden" name="notes" value="{{ $data['notes'] }}">
+                                            <input type="hidden" name="notes" value="{{ $data['noted'] }}">
 
                                         </label>
 

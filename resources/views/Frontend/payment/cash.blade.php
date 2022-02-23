@@ -96,7 +96,7 @@
                                     <h4 class="unicase-checkout-title">Select Payment Method</h4>
                                 </div>
 
-                                <form action="{{ route('cash.order') }}" method="post" id="payment-form">
+                                <form action="" method="post" id="payment-form">
                                     @csrf
                                     <div class="form-row">
 
