@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Cartalyst\Stripe\Stripe;
@@ -74,7 +75,34 @@ class StripeController extends Controller
 
      // End Send Email 
 
+	 //add the comoditied bought in the orderitem table in the db remove session an destroy cart return to dashbord
+     $carts = Cart::content();
+     foreach ($carts as $cart) {
+     	OrderItem::insert([
+     		'order_id' => $order_id, 
+     		'product_id' => $cart->id,
+     		'color' => $cart->options->color,
+     		'size' => $cart->options->size,
+     		'qty' => $cart->qty,
+     		'price' => $cart->price,
+     		'created_at' => Carbon::now(),
 
+     	]);
+     }
+
+
+     if (Session::has('coupon')) {
+     	Session::forget('coupon');
+     }
+
+     Cart::destroy();
+
+     $notification = array(
+			'message' => 'Your Order Place Successfully',
+			'alert-type' => 'success'
+		);
+
+		return redirect()->route('dashboard')->with($notification);
 	}
 
 
