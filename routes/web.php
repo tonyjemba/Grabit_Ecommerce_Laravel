@@ -276,6 +276,10 @@ Route::get('/wishlist', [WhishListController::class, 'ViewWishlist'])->name('wis
 
 // remove wishlist products
 Route::get('/wishlist-remove/{id}', [WhishListController::class, 'RemoveWishlistProduct']);
+
+//stripe payment route
+
+Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
 });
 
  // My Cart Page All Routes
