@@ -20,8 +20,8 @@ class StripeController extends Controller
 	public function StripeOrder(Request $request){
 		\Stripe\Stripe::setApiKey(env('STRIPE_API_KEY'));
 
-		if (Session::has('coupon')) {
-    		$total_amount = Session::get('coupon')['total_amount'];
+		if ($request->session()->has('coupon')) {
+    		$total_amount = $request->session()->get('coupon')['total_amount'];
     	}else{
     		$total_amount = round(Cart::total());
     	}
@@ -62,7 +62,7 @@ class StripeController extends Controller
 
 	]);
 
-	 // Start Send Email 
+	 //Start Send Email 
      $invoice = Order::findOrFail($order_id);
      	$data = [
      		'invoice_no' => $invoice->invoice_no,
@@ -73,7 +73,7 @@ class StripeController extends Controller
 
      	Mail::to($request->email)->send(new orderMail($data));
 
-     // End Send Email 
+    // End Send Email 
 
 	 //add the comoditied bought in the orderitem table in the db remove session an destroy cart return to dashbord
      $carts = Cart::content();
@@ -91,8 +91,8 @@ class StripeController extends Controller
      }
 
 
-     if (Session::has('coupon')) {
-     	Session::forget('coupon');
+     if ($request->session()->has('coupon')) {
+		$request->session()->forget('coupon');
      }
 
      Cart::destroy();
