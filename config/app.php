@@ -230,6 +230,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
 
+      
+
+
     ],
 
 ];
