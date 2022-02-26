@@ -51,6 +51,7 @@ Route::middleware(['auth:admin'])->group(function(){
 Route::get('/admin/login', [AdminController::class, 'destroy'])->name('admin.logout');
 Route::get('/admin/profile',[AdminProfileController::class,'profile'])->name('admin.profile');
 Route::get('/admin/profile/edit',[AdminProfileController::class,'edit'])->name('admin-profile-edit');
+Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
 Route::post('/admin/profile/store',[AdminProfileController::class,'store'])->name('admin.profile.store');
 Route::get('admin/change/password',[AdminProfileController::class,'changepassword'])->name('admin.changepassword');
 Route::post('admin/change/password/trigger',[AdminProfileController::class,'addupdatedpassword'])->name('update.admin.change.password');
@@ -285,6 +286,8 @@ Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('st
 
 //users orders
 Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
+Route::get('/return/order/list', [AllUserController::class, 'ReturnOrderList'])->name('return.order.list');
+Route::get('/cancel/orders', [AllUserController::class, 'CancelOrders'])->name('cancel.orders');
 
 });
 
