@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\WhishListController;
 use App\Http\Controllers\Frontend\UserController;
+use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use Illuminate\Support\Facades\Auth;
@@ -281,6 +282,10 @@ Route::get('/wishlist-remove/{id}', [WhishListController::class, 'RemoveWishlist
 //stripe payment route
 
 Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
+
+//users orders
+Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
+
 });
 
  // My Cart Page All Routes

@@ -12,6 +12,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\orderMail;
 
 class StripeController extends Controller
 {
