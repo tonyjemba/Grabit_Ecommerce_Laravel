@@ -16,7 +16,6 @@ use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\LanguageController;
 use App\Http\Controllers\User\WhishListController;
 use App\Http\Controllers\Frontend\UserController;
-use App\Http\Controllers\User\AllUserController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use Illuminate\Support\Facades\Auth;
@@ -51,7 +50,6 @@ Route::middleware(['auth:admin'])->group(function(){
 Route::get('/admin/login', [AdminController::class, 'destroy'])->name('admin.logout');
 Route::get('/admin/profile',[AdminProfileController::class,'profile'])->name('admin.profile');
 Route::get('/admin/profile/edit',[AdminProfileController::class,'edit'])->name('admin-profile-edit');
-Route::get('/user/profile', [IndexController::class, 'UserProfile'])->name('user.profile');
 Route::post('/admin/profile/store',[AdminProfileController::class,'store'])->name('admin.profile.store');
 Route::get('admin/change/password',[AdminProfileController::class,'changepassword'])->name('admin.changepassword');
 Route::post('admin/change/password/trigger',[AdminProfileController::class,'addupdatedpassword'])->name('update.admin.change.password');
@@ -283,12 +281,6 @@ Route::get('/wishlist-remove/{id}', [WhishListController::class, 'RemoveWishlist
 //stripe payment route
 
 Route::post('/stripe/order', [StripeController::class, 'StripeOrder'])->name('stripe.order');
-
-//users orders
-Route::get('/my/orders', [AllUserController::class, 'MyOrders'])->name('my.orders');
-Route::get('/return/order/list', [AllUserController::class, 'ReturnOrderList'])->name('return.order.list');
-Route::get('/cancel/orders', [AllUserController::class, 'CancelOrders'])->name('cancel.orders');
-
 });
 
  // My Cart Page All Routes
