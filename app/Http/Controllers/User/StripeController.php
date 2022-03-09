@@ -24,7 +24,7 @@ class StripeController extends Controller
 		if ($request->session()->has('coupon')) {
     		$total_amount = $request->session()->get('coupon')['total_amount'];
     	}else{
-    		$total_amount = round(Cart::total());
+    		$total_amount = Cart::total();
     	}
 	$token = $_POST['stripeToken'];
 	$charge = \Stripe\Charge::create([
